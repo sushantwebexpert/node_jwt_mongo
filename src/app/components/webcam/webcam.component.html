@@ -1,0 +1,11 @@
+<div class="p-2" >
+  <webcam *ngIf="!error" [height]="460"
+          [width]="500"
+          [trigger]="imageTrigger"
+          (imageCapture)="captureImage($event)"
+          (initError)="handleInitError($event)"></webcam>
+</div> 
+<div mat-dialog-actions style="gap: 10px;">
+  <button class="px-4 btn btn-primary" color="primary" (click)="triggerSnapshot()" [disabled]="!!error">Capture</button>
+  <button mat-dialog-close class="ml-4 px-4 btn btn-warning">Cancel</button>
+</div>

@@ -1,0 +1,40 @@
+
+<h3 class="mt-2 mb-3 page-title" >Users</h3>
+
+<table cTable hover striped>
+  <thead>
+  <tr>
+    <th scope="col">S.no</th>
+    <th scope="col">Username</th>
+    <th scope="col">Email ID</th>
+    <th scope="col">TimeAlloted</th>
+    <th scope="col"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let p of customers; index as i;">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>{{p.name}}</td>
+    <td>{{p.email}}</td>
+    <td>{{p.time}} hr</td>
+    <td>
+    	<button cButton routerLink='user-edit/{{p._id}}' color="primary" size="sm" class="mx-1">Edit</button>
+    	<button cButton [routerLink] color="primary" size="sm" class="mx-1" (click)="tryDelete(p._id)">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<c-modal id="liveDemoModal" [visible]="visible" (visibleChange)="handleLiveDemoChange($event)">
+  <c-modal-header>
+    <h5 cModalTitle>Delete This User?</h5>
+    <button (click)="cancelMe()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>Are you sure you want to delete this account? This will permanently erase this account.</c-modal-body>
+  <c-modal-footer>
+    <button (click)="cancelMe()" cButton color="light">
+      Cancel
+    </button>
+    <button cButton color="danger" (click)="doDelete()">Delete</button>
+  </c-modal-footer>
+</c-modal>

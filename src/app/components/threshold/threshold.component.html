@@ -1,0 +1,19 @@
+<div class="p-2" >
+	<img src="{{data}}" *ngIf="original" style="width: 500px; height: auto; max-height: 460px;">
+	<img src="{{newImg}}" *ngIf="!original" style="width: 500px; height: auto; max-height: 460px;">
+	<canvas id="dearCanvas" width="500" height="480" style="display: none; border:1px solid #d3d3d3;max-height: 460px;">Your browser does not support the HTML5 canvas tag.</canvas>
+	<div>
+	</div>
+	<div style=" display: flex; align-items: center; flex-wrap: nowrap; justify-content: flex-start; gap: 10px; ">
+		<label class="slider-label">Threshold</label>
+		<div class="range-wrap">
+			<div class="range-value" id="rangeV" style="left: {{style_left}}"><span>{{rValue}}</span></div>
+			<input id="range" type="range" min="1" max="254" value="127" class="slider" step=".1" (input)="showVal($event)">
+		</div>
+	</div>
+</div> 
+<div mat-dialog-actions style="gap: 10px;">
+  <button class="px-4 btn btn-primary" color="primary" (click)="closeMe()">Ok</button>
+ 	<button class="px-4 btn btn-primary" color="primary" (click)="showOriginal()" style="background: #ddd;color: #444;">Show Original</button>
+  <button mat-dialog-close class="ml-4 px-4 btn btn-warning">Cancel</button>
+</div>

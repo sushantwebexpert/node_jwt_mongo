@@ -1,0 +1,105 @@
+<!--main-->
+<div class="wrapper d-flex flex-column min-vh-100 bg-light dark:bg-transparent">
+  <div class="mb-4 d-print-none header header-sticky" position="sticky" sidebarId="sidebar">
+
+  <!--<c-header class="mb-4 d-print-none" position="sticky">-->
+  <ng-container>
+    <c-container [fluid]="true">
+      <c-header-nav class="d-none d-lg-flex me-auto">
+        <c-nav-item>
+          <a routerLink="{{role}}" routerLinkActive="active" style=" color: #fff; text-decoration: none; ">
+            Piximas.com
+          </a>
+        </c-nav-item>
+      </c-header-nav>
+
+      <c-header-nav class="ms-3">
+        <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
+      </c-header-nav>
+
+    </c-container>
+  </ng-container>
+  <!--</c-header>-->
+
+  <ng-template #userDropdown>
+    <c-dropdown alignment="end" variant="nav-item">
+      <button
+        cButton
+        color=""
+        [caret]="false"
+        cDropdownToggle
+        class="py-0"
+      >
+        <c-avatar
+          cTextColor="primary"
+          shape="rounded-1"
+          size="md"
+          src="./assets/img/avatars/avatars.png"
+          status="success"
+        >
+        </c-avatar>
+      </button>
+      <ul cDropdownMenu class="pt-0 pb-0 pr-5 w-auto">
+        <li>
+          <a cDropdownItem [cModalToggle]="verticallyCenteredModal.id" style="cursor: pointer;">
+            Logout
+          </a>
+        </li>
+      </ul>
+    </c-dropdown>
+  </ng-template>
+    
+  </div>
+
+  <!--app-body-->
+  <div class="body flex-grow-1 px-3">
+    <div class="h-auto">
+      <c-row>
+
+        <c-col *ngIf="role == 'admin'" sm="3" class="pt-3 admin-sidebar" style="">
+          <c-nav class="flex-column sidebar" style="position: relative;margin: 0;padding: 0;    width: 100%;">
+            <c-nav-item *ngFor="let nav of navItems;" class="sidebar-nav" style="border-bottom: 1px solid #f1f1f1;">
+              <a [active]="true" [routerLink] cNavLink routerLink="{{nav.url}}">
+                {{nav.name}}
+              </a>
+            </c-nav-item>
+          </c-nav>
+        </c-col>
+
+
+
+        <c-col sm="9" *ngIf="role == 'admin'" >
+          <c-card class="pt-2 pb-2 px-3 rounded-0 admin-card" style="height: 100%;">
+            <router-outlet></router-outlet>
+          </c-card>
+        </c-col>
+<!-- width: 60% -->
+        <c-col sm="12" *ngIf="role == 'user'" >
+          <c-card class="pt-2 pb-2 px-3 rounded-0 customer-card" style="height: 100%;  margin: 0 auto;">
+            <router-outlet></router-outlet>
+          </c-card>
+        </c-col>
+
+      </c-row>
+    </div>
+  </div>
+  <!--app footer-->
+  <app-default-footer></app-default-footer>
+</div>
+
+
+<c-modal #verticallyCenteredModal alignment="center" id="verticallyCenteredModal">
+  <c-modal-header>
+    <h5 cModalTitle>Logout?</h5>
+    <button [cModalToggle]="verticallyCenteredModal.id" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    Are you sure you want to logout the app?
+  </c-modal-body>
+  <c-modal-footer>
+    <button [cModalToggle]="verticallyCenteredModal.id" cButton color="secondary">
+      Cancel
+    </button>
+    <button cButton color="danger" (click)="logout()">Logout</button>
+  </c-modal-footer>
+</c-modal>

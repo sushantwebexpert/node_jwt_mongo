@@ -1,0 +1,40 @@
+.services-box {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.services-box div {
+	width: calc(33% - 12px);
+    height: 100px;
+    
+    margin: 6px;
+    text-align: center;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    
+}
+
+.services-box div label {
+	background: #5f8cdd;
+padding: 14px;
+border-radius: 10px;
+    height: 100px;display: inline-flex;
+    align-items: center;
+    justify-content: center;color: #ffffff;
+    font-size: 12px;width: 100%;
+    position: relative;border: 2px solid #10009a;
+}
+
+.services-box div.active label {
+	background: #10009a;
+}
+.r-time {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+
+

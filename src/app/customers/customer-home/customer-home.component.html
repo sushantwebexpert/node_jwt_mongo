@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-8">
+	  <h3 class="mt-2 mb-3 page-title">Services</h3>
+    </div>
+    <div class="col-4">
+		<div class="time-clock">
+	  		<h3 class="mt-2 mb-3 page-title" style="color: #4caf50;">Remaining Time : <span class="r-time">
+
+<countdown #cd [config]="config" (event)="handleEvent($event)"></countdown> </span></h3>			
+		</div>
+    </div>
+</div>
+
+
+		<c-button-group class="services-box">
+
+			<div [class.active]="userForm.word_cloud_maker">
+		    	<label (click)="openValue('word_cloud_maker', '/work/wcm')" cNavLink class="">Word Cloud Maker</label>
+			</div>
+
+			<div [class.active]="userForm.star_map_maker">
+		    	<label (click)="openValue('star_map_maker')" cNavLink class="">Star Map Maker</label>
+		    </div>
+
+			<div [class.active]="userForm.street_map_maker">
+	    		<label (click)="openValue('street_map_maker')" cNavLink class="">Street Map Maker</label>
+		    </div>
+
+			<div [class.active]="userForm.brand_image_maker">
+		    	<label (click)="openValue('brand_image_maker')" cNavLink class="">Brand Image Maker</label>
+		    </div>
+
+			<div [class.active]="userForm.sticker_maker">
+	    		<label (click)="openValue('sticker_maker')" cNavLink class="">Sticker Maker</label>
+		    </div>
+
+			<div [class.active]="userForm.sketch_art_maker">
+		    	<label (click)="openValue('sketch_art_maker')" cNavLink class="">Sketch Art Maker</label>
+		    </div>
+
+			<div [class.active]="userForm.magazine_art_maker">
+	    		<label (click)="openValue('magazine_art_maker')" cNavLink class="">Magazine Art Maker</label>
+		    </div>
+
+			<div [class.active]="userForm.text_art_maker">
+		    	<label (click)="openValue('text_art_maker')" cNavLink class="">Text Art Maker</label>
+		    </div>
+
+			<div [class.active]="userForm.collage_maker">
+	    		<label (click)="openValue('collage_maker')" cNavLink class="">Collage Maker</label>
+		    </div>
+
+		</c-button-group>

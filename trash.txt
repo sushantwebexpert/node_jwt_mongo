@@ -1,0 +1,169 @@
+<section *ngIf="section == 'dcanvas'">
+  <h3 class="mt-2 mb-3 page-title">Word Cloud Maker
+    <a class="back-link" (click)="setSection('template')"><span>←</span> Edit Template</a>
+  </h3>
+  
+  <div class="row mt-2 mb-4">
+    <div class="col-8">
+      <!-- canvs setup -->
+        
+        <div class="template-box" style="{{bGstyle}}">
+        
+          <div class="template-box-inner">
+
+            <div class="row">
+              <div class="col">
+                <div class="logo">
+                  <img src="{{imageLogo}}">
+                </div>
+              </div>
+              <div class="col">
+                <div class="company-name">{{templateForm.value.company_name}}</div>
+              </div>
+            </div>
+
+            <div class="main-canvas">
+              <div class="canvas-inner" style="{{bGCanvasstyle}}">
+                <canvas></canvas>
+               </div>
+            </div>
+
+            <div class="description">
+               Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.
+            </div>
+
+          </div>
+        </div>
+
+
+    </div>
+    <div class="col-4">
+      
+      <!-- controller -->
+      <div class="controller-box">
+
+        <form class="form-box" [formGroup]="canvasForm" (ngSubmit)="saveCanvas()" >
+
+        <c-accordion [flush]="true">
+          <c-accordion-item #item0="cAccordionItem" [visible]="true">
+
+            <ng-template cTemplateId="accordionHeaderTemplate">
+              <button (click)="item0.toggleItem()" [collapsed]="!item0.visible" cAccordionButton>
+                Type 20 words
+              </button>
+            </ng-template>
+            <ng-template cTemplateId="accordionBodyTemplate">
+              <div class="accordion-body">
+                <div class="form-group">
+                  <input type="email" class="form-control" formControlName="words" placeholder="Type 20 words...">
+                </div>
+              </div>
+            </ng-template>
+          </c-accordion-item>
+          <c-accordion-item #item1="cAccordionItem" [visible]="false">
+            <ng-template cTemplateId="accordionHeaderTemplate">
+              <button (click)="item1.toggleItem()" [collapsed]="!item1.visible" cAccordionButton>
+                Canvas Background Type
+              </button>
+            </ng-template>
+            <ng-template cTemplateId="accordionBodyTemplate">
+              <div class="accordion-body">
+                <div class="form-group p-0">
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="inlineCheckbox1">Color</label>
+                    <input class="form-check-input" type="radio" formControlName="background" id="inlineCheckbox1" value="color" (change)="changeCanvasStyle()">
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="inlineCheckbox2">Image</label>
+                    <input class="form-check-input" type="radio" formControlName="background" id="inlineCheckbox2" value="image" (change)="changeCanvasStyle()">
+                  </div>
+                </div>
+
+                <div class="form-group custom-color" [class.d-none]="canvasForm.value.background == 'image'">
+                  <label class="custom-file-label d-block" for="customColor">Choose Background Color</label>
+                  <input type="color" class="custom-color-input" id="customColor" formControlName="background_color" (change)="changeCanvasStyle()" style="min-height: 36px;width: 100%; padding: 0; border-radius: 0; border: 0; ">
+                </div>
+
+
+                <div class="form-group custom-file" [class.d-none]="canvasForm.value.background == 'color'">
+                  <label class="custom-file-label d-block" for="customFile">Upload background image</label>
+                  <input type="file" class="custom-file-input" id="customFile" formControlName="background_img" (change)="setCanvasImageBg($event)" accept="file_type | image/*">
+                </div>
+              </div>
+            </ng-template>
+          </c-accordion-item>
+          
+
+          <c-accordion-item #item2="cAccordionItem" [visible]="false">
+            <ng-template cTemplateId="accordionHeaderTemplate">
+              <button (click)="item2.toggleItem()" [collapsed]="!item2.visible" cAccordionButton>
+                Select Image from
+              </button>
+            </ng-template>
+            <ng-template cTemplateId="accordionBodyTemplate">
+              <div class="accordion-body">
+                 <div class="form-group p-0">
+                    <div class="form-check form-image-area">
+                      <button type="submit" cButton class="px-4 btn btn-primary" color="primary" (click)="openCamera()">
+                        Camera
+                      </button>
+                       <!-- (click)="openCamera()" -->
+                      <input type="file" class="px-4 btn btn-primary btn-file-type" title="your text" color="primary" (change)="openFile($event)" accept="file_type | image/*">
+                       
+                     </div>
+                  </div>
+              </div>
+            </ng-template>
+          </c-accordion-item>
+
+          <c-accordion-item #item3="cAccordionItem" [visible]="false">
+            <ng-template cTemplateId="accordionHeaderTemplate">
+              <button (click)="item3.toggleItem()" [collapsed]="!item3.visible" cAccordionButton>
+                Select Size
+              </button>
+            </ng-template>
+            <ng-template cTemplateId="accordionBodyTemplate">
+              <div class="accordion-body">
+                 <div class="form-group p-0">
+                  <div class="form-check form-check-psize" *ngFor="let ps of paperSize; let i = index">
+                    <input class="form-check-input" type="radio" formControlName="papersize" id="paperSize{{i}}" value="{{ps}}">
+                    <label class="" for="paperSize{{i}}">{{ps}}</label>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </c-accordion-item>
+
+
+          <c-accordion-item #item4="cAccordionItem" [visible]="false">
+            <ng-template cTemplateId="accordionHeaderTemplate">
+              <button (click)="item4.toggleItem()" [collapsed]="!item4.visible" cAccordionButton>
+                Text lines
+              </button>
+            </ng-template>
+            <ng-template cTemplateId="accordionBodyTemplate">
+              <div class="accordion-body">
+                <div class="form-group">
+                  <input type="email" class="form-control" formControlName="textlines" placeholder="Type 20 words...">
+                </div>
+              </div>
+            </ng-template>
+          </c-accordion-item>
+
+        </c-accordion>
+
+          <c-row class="mt-2">
+            <c-col xs="6">
+              <button type="submit" cButton class="px-4 btn btn-primary" color="primary">
+                Save & Print
+              </button>
+            </c-col>
+          </c-row>
+        </form>
+        
+      </div>
+
+    </div>
+  </div>
+</section>

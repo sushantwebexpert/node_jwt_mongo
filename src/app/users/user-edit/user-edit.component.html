@@ -1,0 +1,158 @@
+<h3 class="mt-2 mb-3 page-title">Edit User</h3>
+
+<form cForm class="row g-3 mt-3" [formGroup]="userForm" (ngSubmit)="addUser()">
+
+	<c-row class="mb-3">
+	    <label cLabel="col" cCol [sm]="2" for="inputName">Name</label>
+	    <c-col [sm]="10">
+	      <input cFormControl id="inputName" type="text" formControlName="name" />
+	    </c-col>
+	</c-row>
+
+	<c-row class="mb-3">
+	    <label cLabel="col" cCol [sm]="2" for="inputEmail">Email</label>
+	    <c-col [sm]="10">
+	      <input cFormControl id="inputEmail" type="email" formControlName="email" />
+	    </c-col>
+	</c-row>
+
+	<c-row class="mb-3">
+	    <label cLabel="col" cCol [sm]="2" for="inputUsername">Username</label>
+	    <c-col [sm]="10">
+	      <input cFormControl id="inputUsername" type="text" formControlName="username" />
+	    </c-col>
+	</c-row>
+
+	<c-row class="mb-3">
+	    <label cLabel="col" cCol [sm]="2" for="inputPassword-1">Password</label>
+	    <c-col [sm]="10">
+	      <input cFormControl id="inputPassword-1" type="password" formControlName="password" />
+	    </c-col>
+	</c-row>
+
+	<c-row class="mb-3">
+	    <label cLabel="col" cCol [sm]="2" for="inputPassword-2">Confirm Password</label>
+	    <c-col [sm]="10">
+	      <input cFormControl id="inputPassword-2" type="password" formControlName="cpassword" />
+	    </c-col>
+	</c-row>
+
+	<c-row class="mb-3">
+	    <label cLabel="col" cCol [sm]="2" for="inputTime">Time Allot</label>
+	    <c-col [sm]="10">
+	      <select aria-label="Default select example" cSelect id="inputTime" formControlName="time">
+		      	<option>Select a time duration</option>
+				<option value="3">3hr</option>
+				<option value="6">6hr</option>
+				<option value="12">12hr</option>
+				<option value="24">24hr</option>
+				<option value="48">48hr</option>
+				<option value="72">72hr</option>
+				<option value="96">96hr</option>
+				<option value="120">120hr</option>
+				<option value="144">144hr</option>
+				<option value="168">168hr</option>
+				<option value="360">360hr</option>
+				<option value="720">720hr</option>
+		    </select>
+	    </c-col>
+	</c-row>
+
+	<c-row class="mb-3">
+	    <label cLabel="col" cCol [sm]="2" for="inputServices">Services Allow</label>
+	    <c-col [sm]="10">
+
+		<c-button-group class="services-box">
+
+			<div [class.active]="userForm.value.word_cloud_maker">
+		    	<input class="btn-check" formControlName="word_cloud_maker" type="checkbox" />
+		    	<label (click)="setValue('word_cloud_maker')" class="">Word Cloud Maker</label>
+			</div>
+
+			<div [class.active]="userForm.value.star_map_maker">
+			    <input class="btn-check" formControlName="star_map_maker" type="checkbox" />
+		    	<label (click)="setValue('star_map_maker')" class="">Star Map Maker</label>
+		    </div>
+
+			<div [class.active]="userForm.value.street_map_maker">
+			    <input class="btn-check" formControlName="street_map_maker" type="checkbox" />
+	    		<label (click)="setValue('street_map_maker')" class="">Street Map Maker</label>
+		    </div>
+
+			<div [class.active]="userForm.value.brand_image_maker">
+			    <input class="btn-check" formControlName="brand_image_maker" type="checkbox" />
+		    	<label (click)="setValue('brand_image_maker')" class="">Brand Image Maker</label>
+		    </div>
+
+			<div [class.active]="userForm.value.sticker_maker">
+			    <input class="btn-check" formControlName="sticker_maker" type="checkbox" />
+	    		<label (click)="setValue('sticker_maker')" class="">Sticker Maker</label>
+		    </div>
+
+			<div [class.active]="userForm.value.sketch_art_maker">
+			    <input class="btn-check" formControlName="sketch_art_maker" type="checkbox" />
+		    	<label (click)="setValue('sketch_art_maker')" class="">Sketch Art Maker</label>
+		    </div>
+
+			<div [class.active]="userForm.value.magazine_art_maker">
+			    <input class="btn-check" formControlName="magazine_art_maker" type="checkbox" />
+	    		<label (click)="setValue('magazine_art_maker')" class="">Magazine Art Maker</label>
+		    </div>
+
+			<div [class.active]="userForm.value.text_art_maker">
+			    <input class="btn-check" formControlName="text_art_maker" type="checkbox" />
+		    	<label (click)="setValue('text_art_maker')" class="">Text Art Maker</label>
+		    </div>
+
+			<div [class.active]="userForm.value.collage_maker">
+			    <input class="btn-check" formControlName="collage_maker" type="checkbox" />
+	    		<label (click)="setValue('collage_maker')" class="">Collage Maker</label>
+		    </div>
+
+		</c-button-group>
+
+
+
+
+
+
+
+	    </c-col>
+	</c-row>
+
+	<c-row class="mb-3">
+	    <c-col [sm]="12">
+    	<button cButton class="m-1" disabled *ngIf="loading">
+			  <c-spinner aria-hidden="true" size="sm"></c-spinner>
+			  Processing...
+			</button>
+
+          <button cButton type="submit" *ngIf="!loading">Update User</button>
+	    </c-col>
+	</c-row>
+
+</form>
+<div *ngIf="showErr" style="display: block;color: #ffffff;
+    background: {{clr}};
+    border-color: #c2e0ff;
+    box-shadow: 0px 0px 42px 12px #d3cece;
+    border-radius: 1px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 400px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0;" >{{et}}
+
+<span (click)="showErr = false" style="position: fixed;
+    right: -4px;
+    top: -5px;
+    background: #fff;
+    display: block;
+    padding: 10px;
+    color: #333;
+    line-height: 0;cursor: pointer;">x</span>
+</div>

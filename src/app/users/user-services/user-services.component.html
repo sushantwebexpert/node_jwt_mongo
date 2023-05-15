@@ -1,0 +1,39 @@
+		<c-button-group class="services-box">
+
+			<div class="active" [class.active]="userForm.value.word_cloud_maker">
+		    	<label cNavLink routerLink="/work/wcm" class="">Word Cloud Maker</label>
+			</div>
+
+			<div class="active" [class.active]="userForm.value.star_map_maker">
+		    	<label (click)="openValue('star_map_maker')" class="">Star Map Maker</label>
+		    </div>
+
+			<div class="active" [class.active]="userForm.value.street_map_maker">
+	    		<label (click)="openValue('street_map_maker')" class="">Street Map Maker</label>
+		    </div>
+
+			<div class="active" [class.active]="userForm.value.brand_image_maker">
+		    	<label (click)="openValue('brand_image_maker')" class="">Brand Image Maker</label>
+		    </div>
+
+			<div class="active" [class.active]="userForm.value.sticker_maker">
+	    		<label (click)="openValue('sticker_maker')" class="">Sticker Maker</label>
+		    </div>
+
+			<div class="active" [class.active]="userForm.value.sketch_art_maker">
+		    	<label (click)="openValue('sketch_art_maker')" class="">Sketch Art Maker</label>
+		    </div>
+
+			<div class="active" [class.active]="userForm.value.magazine_art_maker">
+	    		<label (click)="openValue('magazine_art_maker')" class="">Magazine Art Maker</label>
+		    </div>
+
+			<div class="active" [class.active]="userForm.value.text_art_maker">
+		    	<label (click)="openValue('text_art_maker')" class="">Text Art Maker</label>
+		    </div>
+
+			<div class="active" [class.active]="userForm.value.collage_maker">
+	    		<label (click)="openValue('collage_maker')" class="">Collage Maker</label>
+		    </div>
+
+		</c-button-group>
